@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Cooperchip.ITDeveloper.Data.ORM
 {
-    public class ITDeveloperDbContext
+    public class ITDeveloperDbContext : DbContext
     {
     }
 }
