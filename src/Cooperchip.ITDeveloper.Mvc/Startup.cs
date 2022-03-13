@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Cooperchip.ITDeveloper.Data.ORM;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -31,8 +33,8 @@ namespace Cooperchip.ITDeveloper.Mvc
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            //services.AddDbContext<ITDeveloperDbContext>(options =>
-            //                        options.UseSqlServer(Configuration.GetConnectionString("DefaultITDeveloper")));
+            services.AddDbContext<ITDeveloperDbContext>(options =>
+                                    options.UseSqlServer(Configuration.GetConnectionString("DefaultITDeveloper")));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
