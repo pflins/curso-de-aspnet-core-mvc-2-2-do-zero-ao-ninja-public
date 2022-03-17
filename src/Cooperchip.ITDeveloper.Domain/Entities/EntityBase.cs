@@ -10,6 +10,7 @@ namespace Cooperchip.ITDeveloper.Domain.Entities
         {
             this.Id = Guid.NewGuid();
         }
+
         public Guid Id { get; set; }
     }
 }
