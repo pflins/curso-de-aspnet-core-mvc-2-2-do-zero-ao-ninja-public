@@ -4,14 +4,16 @@ using Cooperchip.ITDeveloper.Data.ORM;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cooperchip.ITDeveloper.Data.Migrations
 {
     [DbContext(typeof(ITDeveloperDbContext))]
-    partial class ITDeveloperDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220331065401_AddMappingsEstadoPacienteEPacienteMapApplyAll")]
+    partial class AddMappingsEstadoPacienteEPacienteMapApplyAll
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +54,7 @@ namespace Cooperchip.ITDeveloper.Data.Migrations
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnName("Descricao")
-                        .HasColumnType("varchar(30)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(20);
 
                     b.HasKey("Id");
@@ -69,7 +71,7 @@ namespace Cooperchip.ITDeveloper.Data.Migrations
 
                     b.Property<string>("Cpf")
                         .HasColumnName("Cpf")
-                        .HasColumnType("varchar(11)")
+                        .HasColumnType("varchar(100)")
                         .IsFixedLength(true)
                         .HasMaxLength(11);
 
@@ -79,25 +81,25 @@ namespace Cooperchip.ITDeveloper.Data.Migrations
 
                     b.Property<string>("Email")
                         .HasColumnName("Email")
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<Guid>("EstadoPacienteId");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnName("Nome")
-                        .HasColumnType("varchar(80)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Rg")
                         .HasColumnName("Rg")
-                        .HasColumnType("varchar(15)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(15);
 
                     b.Property<DateTime>("RgDataEmissao");
 
                     b.Property<string>("RgOrgao")
                         .HasColumnName("RgOrgao")
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<int>("Sexo");
 
