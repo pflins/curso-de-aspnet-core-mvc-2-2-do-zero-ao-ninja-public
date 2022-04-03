@@ -1,8 +1,11 @@
 ﻿using Cooperchip.ITDeveloper.Data.ORM;
+using Cooperchip.ITDeveloper.Mvc.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,8 +37,14 @@ namespace Cooperchip.ITDeveloper.Mvc
             });
 
             services.AddDbContext<ITDeveloperDbContext>(options =>
-                                    options.UseSqlServer(Configuration.GetConnectionString("DefaultITDeveloper")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultITDeveloper")));
 
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultITDeveloper")));
+
+            services.AddDefaultIdentity<IdentityUser>()
+                //.AddDefaultUI(UIFramework.Bootstrap4)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -57,6 +66,8 @@ namespace Cooperchip.ITDeveloper.Mvc
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

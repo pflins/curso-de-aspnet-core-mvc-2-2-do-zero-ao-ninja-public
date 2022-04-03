@@ -2,16 +2,23 @@
     ViewData["Title"] = "Home Page";
 }
 
-<vc:cabecalho titulo="Medical Management-Sys / Dashboard" subtitulo="Módulo de Administração de Pacientes e Estatísticas">
 
-</vc:cabecalho>
+@*<vc:cabecalho titulo="Medical Management-Sys / Dashboard" subtitulo="Módulo de Administração de Pacientes e Estatísticas">
 
-<div class="row">
-    <partial name="PartialViews/_estado_paciente" />
-</div>
+    </vc:cabecalho>*@
+
+@await Component.InvokeAsync("Cabecalho",
+    new
+    {
+        titulo = "Medical Management-Sys / Dashboard",
+        subtitulo = "Módulo de Administração de Pacientes e Estatísticas"
+    })
+
+<partial name="PartialViews/_estado_paciente" />
+
+
 
 <div class="panel panel-default panel-controls">
-
     <div class="panel panel-heading">
         <h3>Estatísticas e Marcadores em Tempo Real</h3>
     </div>
@@ -309,7 +316,7 @@
                     <ul class="list-group recent-comments">
                         <li class="list-group-item clearfix comment-success">
                             <div class="avatar pull-left mr15">
-                                <img src="img/avatars/2.jpg" alt="avatar">
+                                <img src="~/img/avatars/2.jpg" alt="avatar">
                             </div>
                             <p class="text-ellipsis"><span class="name strong">Ben Simpson: </span> Very happy with your support is really great, keep that quality.</p>
                             <span class="date text-muted small pull-left">Dec 18, 2014, 4:24 pm</span>
@@ -317,7 +324,7 @@
                         </li>
                         <li class="list-group-item clearfix comment-default">
                             <div class="avatar pull-left mr15">
-                                <img src="img/avatars/3.jpg" alt="avatar">
+                                <img src="~/img/avatars/3.jpg" alt="avatar">
                             </div>
                             <p class="text-ellipsis"><span class="name strong">Jonh: </span> Fine items but you could invest more time.</p>
                             <span class="date text-muted small pull-left">Dec 18, 2014, 12:11 pm</span>
@@ -325,7 +332,7 @@
                         </li>
                         <li class="list-group-item clearfix comment-info">
                             <div class="avatar pull-left mr15">
-                                <img src="img/avatars/4.jpg" alt="avatar">
+                                <img src="~/img/avatars/4.jpg" alt="avatar">
                             </div>
                             <p class="text-ellipsis"><span class="name strong">Dina Dowsen: </span> Awesome items, really fast delivery.</p>
                             <span class="date text-muted small pull-left">Dec 18, 2014, 8:17 pm</span>
@@ -333,7 +340,7 @@
                         </li>
                         <li class="list-group-item clearfix comment-warning">
                             <div class="avatar pull-left mr15">
-                                <img src="img/avatars/5.jpg" alt="avatar">
+                                <img src="~/img/avatars/5.jpg" alt="avatar">
                             </div>
                             <p class="text-ellipsis"><span class="name strong">Matt: </span> I`m not impressed but is fine.</p>
                             <span class="date text-muted small pull-left">Dec 17, 2014, 6:24 pm</span>
@@ -341,7 +348,7 @@
                         </li>
                         <li class="list-group-item clearfix comment-danger">
                             <div class="avatar pull-left mr15">
-                                <img src="img/avatars/6.jpg" alt="avatar">
+                                <img src="~/img/avatars/6.jpg" alt="avatar">
                             </div>
                             <p class="text-ellipsis"><span class="name strong">Ben Simpson: </span> This is worst item i ever seen.</p>
                             <span class="date text-muted small pull-left">Dec 16, 2014, 1:20 pm</span>
@@ -357,3 +364,4 @@
     <!-- End .row -->
 
 </div>
+
