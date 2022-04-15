@@ -15,6 +15,7 @@ namespace Cooperchip.ITDeveloper.Data.ORM
         public DbSet<Mural> Mural { get; set; }
         public DbSet<Paciente> Paciente { get; set; }
         public DbSet<EstadoPaciente> EstadoPaciente { get; set; }
+        public DbSet<PacienteTeste> PacienteTeste { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,8 +24,8 @@ namespace Cooperchip.ITDeveloper.Data.ORM
                 .SelectMany(e => e.GetProperties()
                     .Where(p => p.ClrType == typeof(string))))
             {
-                property.Relational().ColumnType = "varchar(100)";
-                //property.SetColumnType("varchar(90)");
+                //property.Relational().ColumnType = "varchar(100)";
+                property.SetColumnType("varchar(90)");
             }
 
             //modelBuilder.ApplyConfiguration(new EstadoPacienteMap());

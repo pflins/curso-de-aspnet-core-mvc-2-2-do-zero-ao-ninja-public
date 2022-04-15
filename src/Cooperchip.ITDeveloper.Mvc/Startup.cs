@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,11 +47,14 @@ namespace Cooperchip.ITDeveloper.Mvc
                 //.AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -67,17 +71,33 @@ namespace Cooperchip.ITDeveloper.Mvc
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseAuthentication();
+            app.UseRouting();
 
-            app.UseMvc(routes =>
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
                 //routes.MapRoute("modulos","Prontuario/{controller=Home}/{action=Index}/{id?}");
                 //routes.MapRoute("pacientes","{controller=Home}/{action=Index}/{id}/{paciente}");
 
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
+
             });
+
+            //app.UseMvc(routes =>
+            //{
+            //    //routes.MapRoute("modulos","Prontuario/{controller=Home}/{action=Index}/{id?}");
+            //    //routes.MapRoute("pacientes","{controller=Home}/{action=Index}/{id}/{paciente}");
+
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller=Home}/{action=Index}/{id?}");
+            //});
         }
     }
 }

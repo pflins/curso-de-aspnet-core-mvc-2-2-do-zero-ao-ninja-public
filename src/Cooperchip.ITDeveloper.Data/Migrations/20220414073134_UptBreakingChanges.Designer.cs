@@ -4,14 +4,16 @@ using Cooperchip.ITDeveloper.Data.ORM;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cooperchip.ITDeveloper.Data.Migrations
 {
     [DbContext(typeof(ITDeveloperDbContext))]
-    partial class ITDeveloperDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220414073134_UptBreakingChanges")]
+    partial class UptBreakingChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,35 +121,6 @@ namespace Cooperchip.ITDeveloper.Data.Migrations
                     b.HasIndex("EstadoPacienteId");
 
                     b.ToTable("Paciente");
-                });
-
-            modelBuilder.Entity("Cooperchip.ITDeveloper.Domain.Models.PacienteTeste", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("varchar(90)");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("varchar(90)");
-
-                    b.Property<string>("Rg")
-                        .HasColumnType("varchar(90)");
-
-                    b.Property<int>("Sexo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoPaciente")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PacienteTeste");
                 });
 
             modelBuilder.Entity("Cooperchip.ITDeveloper.Domain.Models.Paciente", b =>
