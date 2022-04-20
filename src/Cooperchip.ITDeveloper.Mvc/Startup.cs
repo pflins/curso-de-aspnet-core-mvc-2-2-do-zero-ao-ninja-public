@@ -1,20 +1,18 @@
 ﻿using Cooperchip.ITDeveloper.Data.ORM;
 using Cooperchip.ITDeveloper.Mvc.Data;
+
+using KissLog;
+using KissLog.Apis.v1.Listeners;
+using KissLog.AspNetCore;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cooperchip.ITDeveloper.Mvc
 {
@@ -30,6 +28,9 @@ namespace Cooperchip.ITDeveloper.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped((context) =>  Logger.Factory.Get());
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -62,7 +63,8 @@ namespace Cooperchip.ITDeveloper.Mvc
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Logger/Index");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -75,6 +77,15 @@ namespace Cooperchip.ITDeveloper.Mvc
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            // make sure it is added after app.UseStaticFiles() and app.UseSession(), and before app.UseMvc()
+            app.UseKissLogMiddleware(options =>
+            {
+                options.Listeners.Add(new KissLogApiListener(new KissLog.Apis.v1.Auth.Application(
+                    organizationId: Configuration["KissLog.OrganizationId"],
+                    applicationId: Configuration["KissLog.ApplicationId"])
+                ));
+            });
 
             app.UseEndpoints(endpoints =>
             {
