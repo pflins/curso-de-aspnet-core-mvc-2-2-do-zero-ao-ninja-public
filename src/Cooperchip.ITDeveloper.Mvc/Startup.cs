@@ -1,6 +1,6 @@
 ﻿using Cooperchip.ITDeveloper.Data.ORM;
 using Cooperchip.ITDeveloper.Mvc.Data;
-
+using Cooperchip.ITDeveloper.Mvc.Extentions.Filter;
 using KissLog;
 using KissLog.Apis.v1.Listeners;
 using KissLog.AspNetCore;
@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,8 +29,6 @@ namespace Cooperchip.ITDeveloper.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped((context) =>  Logger.Factory.Get());
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -48,10 +47,20 @@ namespace Cooperchip.ITDeveloper.Mvc
                 //.AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(AuditoriaILoggerFilter));
+
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            // register dependencies
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped((context) => Logger.Factory.Get());
+
+            services.AddScoped<AuditoriaILoggerFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
