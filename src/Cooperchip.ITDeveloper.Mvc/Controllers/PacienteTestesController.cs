@@ -10,22 +10,22 @@ using Cooperchip.ITDeveloper.Domain.Models;
 
 namespace Cooperchip.ITDeveloper.Mvc.Controllers
 {
-    public class PacienteTesteController : Controller
+    public class PacienteTestesController : Controller
     {
         private readonly ITDeveloperDbContext _context;
 
-        public PacienteTesteController(ITDeveloperDbContext context)
+        public PacienteTestesController(ITDeveloperDbContext context)
         {
             _context = context;
         }
 
-        // GET: PacienteTeste
+        // GET: PacienteTestes
         public async Task<IActionResult> Index()
         {
             return View(await _context.PacienteTeste.ToListAsync());
         }
 
-        // GET: PacienteTeste/Details/5
+        // GET: PacienteTestes/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -43,15 +43,15 @@ namespace Cooperchip.ITDeveloper.Mvc.Controllers
             return View(pacienteTeste);
         }
 
-        // GET: PacienteTeste/Create
+        // GET: PacienteTestes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: PacienteTeste/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: PacienteTestes/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nome,DataNascimento,Email,TipoPaciente,Sexo,Rg,Id")] PacienteTeste pacienteTeste)
@@ -66,7 +66,7 @@ namespace Cooperchip.ITDeveloper.Mvc.Controllers
             return View(pacienteTeste);
         }
 
-        // GET: PacienteTeste/Edit/5
+        // GET: PacienteTestes/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -82,9 +82,9 @@ namespace Cooperchip.ITDeveloper.Mvc.Controllers
             return View(pacienteTeste);
         }
 
-        // POST: PacienteTeste/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: PacienteTestes/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Nome,DataNascimento,Email,TipoPaciente,Sexo,Rg,Id")] PacienteTeste pacienteTeste)
@@ -117,7 +117,7 @@ namespace Cooperchip.ITDeveloper.Mvc.Controllers
             return View(pacienteTeste);
         }
 
-        // GET: PacienteTeste/Delete/5
+        // GET: PacienteTestes/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -135,7 +135,7 @@ namespace Cooperchip.ITDeveloper.Mvc.Controllers
             return View(pacienteTeste);
         }
 
-        // POST: PacienteTeste/Delete/5
+        // POST: PacienteTestes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
