@@ -24,8 +24,19 @@
     <a asp-controller="Carrinho" asp-action="Index"><i class="l-basic-anchor"></i><span class="txt">Carrinho</span></a>
 </li>
 
-<li>
+@*<li>
     <a asp-controller="Paciente" asp-action="Index"><i class="l-basic-chronometer"></i><span class="txt">Pacientes</span></a>
+</li>*@
+<li>
+    <a href="#"><i class="l-basic-chronometer"></i> <span class="txt">Pacientes</span></a>
+    <ul class="sub">
+        <li>
+            <a asp-controller="Paciente" asp-action="Index"><span class="txt">Pacientes</span></a>
+        </li>
+        <li>
+            <a asp-controller="PacienteTeste" asp-action="Index"><span class="txt">Paciente Teste</span></a>
+        </li>
+    </ul>
 </li>
 
 <li>
